@@ -1,16 +1,20 @@
-<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" > 
+<aura:component implements="forceCommunity:availableForAllPageTypes" access="global" controller="SendInvites"> 
     <aura:attribute name="email" type="String" />
     <aura:attribute name="startDate" type="Date" />
     <aura:attribute name="duration" type="String" />
     
     <lightning:card title="Send Invite" footer="Happy Sending Invites ">
         <lightning:input type="text" name="Email" label="Plase Enter"  value="{!v.email}"/>
-        <lightning:input type="Date" name="startDate" label="Plase Enter start Date" value="{!v.startDate}"/>      
-        <lightning:input type="text" name="Duration" label="Plase Enter Duration" value="{!v.duration}"/> 
+        <lightning:input type="Date" name="startDate" label="Plase Enter start Date" value="{!v.startDate}"/>  
+        <lightning:select name="selectItem" label="Please Enter Duration"  value="{!v.duration}">
+            <option value="1">one Hour</option>
+            <option value="2">Two Hours </option>
+            <option value="3">Three Hours </option>
+        </lightning:select>
         <br/>
-        <lightning:button label="exampleButton"/>
-       
-    </lightning:card>
+        <lightning:button variant="Brand"  label="Send Invite " onclick="{!c.doSend}"/>
+               
+    </lightning:card>   
     
     
     

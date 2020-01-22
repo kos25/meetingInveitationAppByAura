@@ -1,25 +1,25 @@
 public class SendInvites {
-    public String sendTo { get; set; }
-    public String test{get;set;}
+
     public SendInvites() {}
-     public PageReference sendInvite() {
+    @AuraEnabled
+     public static void   sendInvite( String email , String startDate , String duration ) {
         Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-        String[] toAddresses = new String[] {'kaustubhjaiswal221@gmail.com'};
+        String[] toAddresses = new String[] {email};
         mail.setToAddresses(toAddresses);
         mail.setSubject('Meeting Invitation');
         mail.setPlainTextBody('');
         Messaging.EmailFileAttachment attach = new Messaging.EmailFileAttachment();
         attach.filename = 'meeting.ics';
-        attach.ContentType = 'text/calendar;';
+        attach.ContentType = 'text/calendar;';  
         attach.inline = true;
-        attach.body = invite();
+        attach.body = invite(startDate , duration );
         mail.setFileAttachments(new Messaging.EmailFileAttachment[] {attach});
         Messaging.SendEmailResult[] er = Messaging.sendEmail(new Messaging.Email[] {mail});
-        return  null ; 
+      
     }
     
-    Public  Blob invite() {
-        String a = test ;
+   public static  Blob invite(String startDate , String duration  ) {
+        String a = '1' ;
         String txtInvite = '';
         txtInvite += 'BEGIN:VCALENDAR\n';
         txtInvite += 'PRODID:-//Microsoft Corporation//Outlook 12.0 MIMEDIR//EN\n';
